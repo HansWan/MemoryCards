@@ -1,0 +1,14 @@
+<!--pages/home/home.wxml-->
+<button type="primary" bindtap="dealCards" style="border-radius: 0;">发牌------第 {{level}} 关</button>
+<movable-area style="height: {{windowHeight}}px;width: 100%;background: lightgreen;">
+  <view class="item-middle">
+    <image wx:for="{{bigcards}}" src="{{item.url}}" style="width: 33.333%; height: {{item.height}}px;"></image>
+  </view>
+  <movable-view wx:for="{{smallcards}}" direction="all" x="{{item.left}}px" y="{{item.top}}px" style="width: {{smallcardwidth}}px; height: {{smallcardheight}}px;">
+    <image id="{{item.name}}" src="{{item.url}}" bindtap="smallcardClick" bindtouchstart="smallcardMoveStart" bindtouchmove="smallcardMove" bindtouchend="smallcardMoveEnd" style="width: {{item.width}}px; height: {{item.height}}px; top: {{item.top}}px;"></image>
+  </movable-view>
+</movable-area>
+<view>
+<button id='showbutton' disabled="{{!allsmallcardsonbigcards}}" type="primary" bindtap="showCards" style="width: 50%; border-radius: 0; position:fixed; bottom:0"> 亮牌 </button>
+<button id='nextlevel' disabled="{{!complete}}" type="primary" bindtap="showCards" style="width: 50%; border-radius: 0; position:fixed; left: {{windowWidth/2}}px; bottom:0">第 {{level+1}} 关</button>
+</view>

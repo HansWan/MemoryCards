@@ -1,0 +1,12 @@
+/* pages/home/home.wxss */
+button::after {
+    border-radius: 0;
+}
+
+.share-btn 
+{ 
+width:100%; 
+color:green; 
+position:fixed; 
+bottom:0; 
+} 
