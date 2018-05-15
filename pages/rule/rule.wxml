@@ -1,0 +1,12 @@
+<!--pages/rule/rule.wxml-->
+<view class="container" style="">
+<view style="margin-left: 10px;">怎么玩？</view>
+<view style="margin-left: 10px;">【1】发牌</view>
+<view style="margin-left: 10px;">【2】拖小牌到大牌</view>
+<view style="margin-left: 10px;">【3】开牌</view>
+<view style="margin-left: 10px;">【4】过一关得100分</view>
+<view style="margin-left: 10px;">【4】重玩一次减200分</view>
+<view style="margin-left: 10px;">别以为简单，能通关的是超人！</view>
+<view>   </view>
+<button type="primary" bindtap="routeToHome" style='margin-top: 20px;'>进入游戏</button>
+</view>

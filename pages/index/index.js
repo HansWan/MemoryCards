@@ -4,7 +4,8 @@ const app = getApp()
 
 Page({
   data: {
-    motto: '来吧，记牌超人！',
+    motto: '进入游戏',
+    rule: '游戏规则',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -20,7 +21,13 @@ Page({
       url: '../home/home'
     })
   },
+  routeToRule: function () {
+    wx.navigateTo({
+      url: '../rule/rule'
+    })
+  },
   onLoad: function () {
+    app.playAudio('audiowelcome');
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

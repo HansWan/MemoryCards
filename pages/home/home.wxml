@@ -1,14 +1,46 @@
 <!--pages/home/home.wxml-->
-<button type="primary" bindtap="dealCards" style="border-radius: 0;">发牌------第 {{level}} 关</button>
-<movable-area style="height: {{windowHeight}}px;width: 100%;background: lightgreen;">
-  <view class="item-middle">
-    <image wx:for="{{bigcards}}" src="{{item.url}}" style="width: 33.333%; height: {{item.height}}px;"></image>
-  </view>
-  <movable-view wx:for="{{smallcards}}" direction="all" x="{{item.left}}px" y="{{item.top}}px" style="width: {{smallcardwidth}}px; height: {{smallcardheight}}px;">
-    <image id="{{item.name}}" src="{{item.url}}" bindtap="smallcardClick" bindtouchstart="smallcardMoveStart" bindtouchmove="smallcardMove" bindtouchend="smallcardMoveEnd" style="width: {{item.width}}px; height: {{item.height}}px; top: {{item.top}}px;"></image>
+<view class="buttoncontainer">
+  <button id='dealcardsbutton' disabled="{{playing}}" type="primary" bindtap="dealCards" style="width: 50%;">发牌---第{{level}}关
+  <image wx:if="{{level==1}}" src="../../images/clickhere.gif" style="width: 20px; height: 18px;"></image>
+</button>
+  <button id='showcardsbutton' disabled="{{!allsmallcardsonbigcards || !allbigcardsclosed}}" type="primary" bindtap="showCards" style="width: 50%;"> 开牌 </button>
+</view>
+
+<movable-area id="movablearea" style="height: {{desktopHeight-100}}px; width: {{desktopWidth}}px;background: darkgreen; margin-top: 3px;">
+  <movable-view wx:for="{{bigcards}}" wx:key="bigcards" direction="all" disabled="true" damping="150" x="{{item.x - bigcardwidth*0.5}}px" y="{{item.y-bigcardheight*0.5}}px" style="width: {{bigcardwidth}}px; height: {{bigcardheight}}px;">
+    <image id="imagebigcards" src="{{item.url}}" style="width: {{item.width}}px; height: {{item.height}}px;"></image>
+  </movable-view>
+
+  <movable-view wx:for="{{smallcards}}" wx:key="smallcards" direction="all" x="{{item.x - smallcardwidth*0.5}}px" y="{{item.y - smallcardheight*0.5}}px" style="width: {{smallcardwidth}}px; height: {{smallcardheight}}px;">
+    <image id="{{item.name}}" src="{{item.url}}" bindtouchend="smallcardMoveEnd" style="width: {{item.width}}px; height: {{item.height}}px;"></image>
+  </movable-view>
+
+  <movable-view wx:if="{{(!allbigcardsclosed && playing) || complete}}" wx:for="{{bigcards}}" wx:key="bigcardsicons" direction="all" disabled="true" damping="150" x="{{item.x+bigcardwidth/2-smallcardwidth/1.5}}px" y="{{item.y-bigcardheight/2}}px" style="width: {{smallcardwidth/2}}px; height: {{smallcardwidth/2}}px;">
+    <icon type="{{item.match ? 'success_no_circle' : 'cancel'}}" size="{{smallcardwidth/1.5}}" color="red"></icon>
+  </movable-view>
+
+
+  <movable-view direction="none">
+    <button class="homebutton" id="showcardsbutton1" wx:if="{{allsmallcardsonbigcards && allbigcardsclosed}}" type="primary" bindtap="showCards" style="left: {{desktopWidth*0.5-desktopWidth/3/2}}px; top: {{smallcardsinitposition[0][1]-smallcardheight/4}}px; width:{{desktopWidth/3}}px; height: {{desktopWidth/3/2.4}}px;">开牌</button>
+    <button class="homebutton" id="replaybutton" wx:if="{{!allbigcardsclosed && playing}}" type="warn" bindtap="dealCards" style="left: {{desktopWidth*0.5-desktopWidth/3/2}}px; top: {{smallcardsinitposition[0][1]-smallcardheight/4}}px; width:{{desktopWidth/3}}px; height: {{desktopWidth/3/2.4}}px;">重玩</button>
+    <button class="homebutton" id="nextlevelbutton" wx:if="{{complete}}" type="primary" bindtap="dealCards" style="left: {{desktopWidth*0.5-desktopWidth/3/2}}px; top: {{smallcardsinitposition[0][1]-smallcardheight/4}}px; width:{{desktopWidth/3}}px; height: {{desktopWidth/3/2.4}}px;">下一关</button>
   </movable-view>
 </movable-area>
-<view>
-<button id='showbutton' disabled="{{!allsmallcardsonbigcards}}" type="primary" bindtap="showCards" style="width: 50%; border-radius: 0; position:fixed; bottom:0"> 亮牌 </button>
-<button id='nextlevel' disabled="{{!complete}}" type="primary" bindtap="showCards" style="width: 50%; border-radius: 0; position:fixed; left: {{windowWidth/2}}px; bottom:0">第 {{level+1}} 关</button>
+<!--
+<view style="width: 100%; color: white; position: fixed; bottom: 0px; text-align: right; margin-bottom: 12px; margin-right: 20px;">SCORE {{score}}   </view>
+
+<view class="section">
+  <view class="flex-wrp" style="flex-direction:row;">
+    <button class="flex-item bc_green">1</button>
+    <button class="flex-item bc_red">2</button>
+    <button class="flex-item bc_blue">3</button>
+  </view>
+</view>
+-->
+
+  
+<view style="width: 100%; display: flex; position: fixed; bottom: 0px; flex-direction: row;">
+  <button type="primary" bindtap="saveGame" style="width: 33%">保存</button>
+  <button type="primary" bindtap="getMovableviewTop" style="width: 34%;">{{score}}</button>
+  <button type="primary" bindtap="restoreGame" style="width: 33%">恢复</button>
 </view>

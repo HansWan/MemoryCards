@@ -1,6 +1,18 @@
 /* pages/home/home.wxss */
+
+page {  
+  display: block;  
+  min-height: 100%;  
+  background-color: darkgreen;  
+}  
+
 button::after {
     border-radius: 0;
+}
+
+.homebutton {
+  width: 120px; 
+  height: 48px; 
 }
 
 .share-btn 
@@ -10,3 +22,19 @@ color:green;
 position:fixed; 
 bottom:0; 
 } 
+
+.buttoncontainer {
+  background-color:green;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-section{
+  margin-bottom: 20rpx;
+}
+.flex-wrp {display: flex; margin-bottom: 20rpx;}
+.bc_green {background: green;}
+.bc_red {background: red;}
+.bc_blue {background: blue;}

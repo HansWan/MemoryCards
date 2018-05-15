@@ -1,5 +1,10 @@
 //app.js
 App({
+
+  onLoad: function (options) {
+    console.log('appload')
+  },
+
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -32,8 +37,36 @@ App({
         }
       }
     })
+  //获得屏幕高度和宽度
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.globalData.windowWidth = res.windowWidth;
+        that.globalData.windowHeight = res.windowHeight;
+      }
+    })
+  //初始化一个播放声音的组件
+    this.globalData.innerAudioContext = wx.createInnerAudioContext();
+    this.globalData.innerAudioContext.autoplay = false;
   },
+
+  playAudio: function(audiosrc){
+    this.globalData.innerAudioContext.src = this.globalData.audiosrc[audiosrc];     
+    this.globalData.innerAudioContext.play();
+  },
+
   globalData: {
-    userInfo: null
+    userInfo: null,
+    innerAudioContext: null,
+    audiosrc: {
+//      'audiowelcome': 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201708/9077.mp3',
+      'audiowelcome': 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201301/2591.mp3',
+      'audiodealbigcards': 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201507/6098.mp3',   
+      'audiodealsmallcards': 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201403/4256.mp3',
+      'audiodropcards': 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201502/5473.mp3',
+      'audiocomplete': 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201712/9586.mp3',
+      'audiofailed': 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201302/2687.mp3',
+    },
+
   }
 })

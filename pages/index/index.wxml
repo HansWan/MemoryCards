@@ -1,16 +1,17 @@
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <button type="primary" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <text class="userinfo-nickname">欢迎{{userInfo.nickName}}，记牌超人！</text>
     </block>
   </view>
   <view class="cards">
-    <image src='../../images/0.png' style="width: 70px; height: 100px"  bindtap="routeToHome"></image>
+    <image src='../../images/homepicture.png' style="width: 150px; height: 100px"  bindtap="routeToHome"></image>
   </view>
   <view class="usermotto">
-    <text class="user-motto" bindtap="routeToHome">{{motto}}</text>
+    <button type="primary" bindtap="routeToHome">{{motto}}</button>
+    <button type="primary" bindtap="routeToRule" style="margin-top: 5px;">{{rule}}</button>
   </view>
 </view>

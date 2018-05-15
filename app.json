@@ -1,13 +1,14 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/home/home",
+    "pages/rule/rule",
     "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "记牌超人",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   }
 }
